@@ -1,26 +1,59 @@
 body {
+  background-image: url(texture.jpeg);
+  background-size: cover;
+}
+.title {
+  font-family: "Sono", sans-serif;
+  text-align: center;
+  font-size: 4em;
+  text-shadow: 3px 3px rgb(144, 144, 144);
+}
+.aligneverything {
   display: flex;
+  width: 73vw;
+  justify-content: center;
   align-items: center;
+}
+.buttons {
+  display: flex;
   flex-direction: column;
+  width: 25vw;
+  align-items: center;
+}
+.buttondesign {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  width: 10em;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid black;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  color: white;
+}
+.buttondesign:hover {
+  transform: scale(1.1);
+  background-color: black;
+}
+.slidecontainer {
+  display: flex;
+  width: 25vw;
   justify-content: center;
 }
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 400px;
-  margin-bottom: 20px;
-}
-.footer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 500px;
-}
-.box {
-  width: 500px;
-  height: 500px;
+.grid {
   display: grid;
-  border: 1px solid black;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  height: 500px;
+  width: 500px;
+  background-color: #fff;
+}
+footer {
+  font-weight: 300;
+  font-size: 15px;
+  text-align: center;
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 1em;
+  padding-top: 2em;
 }
