@@ -31,22 +31,39 @@ body {
   border-radius: 20px;
   transition: all 0.2s ease-in-out;
   color: white;
+  text-shadow: 1px 1px black;
 }
 .buttondesign:hover {
   transform: scale(1.1);
   background-color: black;
 }
 .slidecontainer {
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid black;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
   display: flex;
-  width: 25vw;
+  flex-direction: column;
+  width: 8.5em;
   justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  text-shadow: 1px 1px black;
+}
+.sliderAmount {
+  font-size: 24px;
+  font-weight: 900;
+  text-shadow: 1px 1px black;
 }
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
   height: 500px;
   width: 500px;
+  box-shadow: 0 6px 20px rgba(137, 137, 137, 0.707);
   background-color: #fff;
 }
 footer {
