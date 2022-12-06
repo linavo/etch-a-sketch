@@ -1,90 +1,71 @@
-let grid = document.querySelector(".grid");
+// defined variables to use for global scope
+let color = "black";
+let click = true;
 let slide = document.querySelector("#myRange");
 let amount = document.querySelector(".sliderAmount");
 
-grid.style.gridTemplateColumns = `repeat(${slide.value},1fr)`;
-grid.style.gridTemplateRows = `repeat(${slide.value},1fr)`;
+// this function will populate the board when user first opens website
+function populateBoard(size) {
+  let board = document.querySelector(".grid");
+  let squares = board.querySelectorAll("div");
+  squares.forEach((div) => div.remove());
+  board.style.gridTemplateColumns = `repeat(${size} , 1fr)`;
+  board.style.gridTemplateRows = `repeat(${size} , 1fr)`;
 
-let choose = document.querySelector("#choose");
-let rainbow = document.querySelector("#rainbow");
-let eraser = document.querySelector("#eraser");
-let clearScreen = document.querySelector("#clearScreen");
+  let amount = size * size;
+  for (let i = 0; i < amount; i++) {
+    let square = document.createElement("div");
+    square.addEventListener("mouseover", colorSquare);
+    square.style.backgroundColor = "white";
+    board.insertAdjacentElement("beforeend", square);
+  }
+}
+// call function to initiate it
+populateBoard(slide.value);
 
-for (let i = 0; i < slide.value ** 2; i++) {
-  let squares = document.createElement("div");
-  choose.addEventListener("click", draw);
-  rainbow.addEventListener("click", rainbowMode);
-  eraser.addEventListener("click", eraseDrawings);
-  clearScreen.addEventListener("click", clearTheScreen);
-  grid.appendChild(squares);
+// onclick function to change the color, check HTML
+function changeColor(choice) {
+  color = choice;
+}
 
-  function colorBlack() {
-    squares.style.backgroundColor = "black";
-  }
-  function colorRainbow() {
-    squares.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-  }
-  function eraseColor() {
-    squares.style.backgroundColor = "white";
-  }
-  function clearTheScreen() {
-    squares.style.backgroundColor = "white";
-  }
-  function draw() {
-    squares.addEventListener("mouseover", colorBlack);
-    squares.removeEventListener("mouseover", colorRainbow);
-    squares.removeEventListener("mouseover", eraseColor);
-  }
-  function rainbowMode() {
-    squares.addEventListener("mouseover", colorRainbow);
-    squares.removeEventListener("mouseover", colorBlack);
-    squares.removeEventListener("mouseover", eraseColor);
-  }
-  function eraseDrawings() {
-    squares.addEventListener("mouseover", eraseColor);
-    squares.removeEventListener("mouseover", colorBlack);
-    squares.removeEventListener("mouseover", colorRainbow);
+// this will color the squares
+function colorSquare() {
+  if (click) {
+    if (color === "random") {
+      this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else if (color === "white") {
+      this.style.backgroundColor = "white";
+    } else {
+      this.style.backgroundColor = color;
+    }
   }
 }
 
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
+// this will reset the game
+function resetGrid() {
+  let board = document.querySelector(".grid");
+  let squares = board.querySelectorAll("div");
+  squares.forEach((div) => (div.style.backgroundColor = "white"));
 }
 
+// this allows users to stop coloring when they click
+document.querySelector("body").addEventListener("click", (e) => {
+  if (e.target.tagName != "BUTTON") {
+    click = !click;
+  }
+});
+
+// this is to change how many squares are on the screen
 slide.addEventListener("input", () => {
+  let grid = document.querySelector(".grid");
   let newValue = document.querySelector("#myRange").value;
   amount.textContent = newValue;
-  removeAllChildNodes(grid);
   grid.setAttribute(
     "style",
     `grid-template-columns: repeat(${newValue}, 2fr); grid-template-rows: repeat(${newValue}, 2fr);`
   );
   for (let i = 0; i < newValue ** 2; i++) {
     let divs = document.createElement("div");
-    choose.addEventListener("click", black);
-    rainbow.addEventListener("click", rainbowColor);
-    eraser.addEventListener("click", erase);
-    clearScreen.addEventListener("click", clear);
-    grid.append(divs);
-    function black() {
-      divs.addEventListener("mouseover", () => {
-        divs.style.backgroundColor = "black";
-      });
-    }
-    function rainbowColor() {
-      divs.addEventListener("mouseover", () => {
-        divs.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      });
-    }
-    function erase() {
-      divs.addEventListener("mouseover", () => {
-        divs.style.backgroundColor = "white";
-      });
-    }
-    function clear() {
-      divs.style.backgroundColor = "white";
-    }
+    grid.appendChild(divs);
   }
 });

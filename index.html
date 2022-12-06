@@ -25,23 +25,36 @@
     </header>
     <div class="aligneverything">
       <div class="buttons">
-        <button id="choose" class="buttondesign">Draw</button>
-        <button id="rainbow" class="buttondesign">Rainbow Mode</button>
-        <button id="eraser" class="buttondesign">Eraser</button>
-        <button id="clearScreen" class="buttondesign">Clear Screen</button>
+        <button id="choose" class="buttondesign" onclick="changeColor('black')">
+          Draw
+        </button>
+        <button
+          id="rainbow"
+          class="buttondesign"
+          onclick="changeColor('random')"
+        >
+          Rainbow Mode
+        </button>
+        <button id="eraser" class="buttondesign" onclick="changeColor('white')">
+          Eraser
+        </button>
+        <button id="clearScreen" class="buttondesign" onclick="resetGrid()">
+          Clear Screen
+        </button>
         <div class="slidecontainer">
           <div>
             Pick a number from <br />
-            1 to 60!
+            1 to 50!
           </div>
           <br />
           <div>Value: <span class="sliderAmount"></span></div>
+
           <input
             type="range"
             min="1"
-            max="60"
+            max="50"
             step="1"
-            value="60"
+            value="50"
             class="slider"
             id="myRange"
           />
